@@ -8,14 +8,19 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 
 const TodoApp = () => {
     const [todos, dispatch] = useReducer(reducer, []);
-    const savedTodos = useLocalStorage('todos', todos, []);
+
+    const load = todos => {
+        dispatch({type: types.RESET, payload: {todos: todos || []}});
+    };
+
+    useLocalStorage('todos', todos, load, [todos]);
 
     const add = () => {
       dispatch({type: types.ADD});
     };
 
     const reset = () => {
-        dispatch({type: types.RESET});
+        dispatch({type: types.RESET, payload: {todos: []}});
     };
 
     return (

@@ -2,10 +2,8 @@ import types from '../actions/todos';
 
 export default function reducer(state, action) {
     switch (action.type) {
-        case types.LOAD:
-            return action.payload.todos;
         case types.RESET:
-            return [];
+            return action.payload.todos;
         case types.ADD:
             return [
                 ...state,

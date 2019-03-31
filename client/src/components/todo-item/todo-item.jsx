@@ -21,8 +21,8 @@ const TodoItem = ({id, text, completed}) => {
 
     return (
         <div className="todo-item">
-            <input type="checkbox" name="completed" value={completed} onChange={complete}/>
-            <input type="text" name="text" onChange={update}/>
+            <input type="checkbox" name="completed" checked={completed} onChange={complete}/>
+            <input type="text" name="text" value={text} onChange={update}/>
             <button onClick={remove}>Delete</button>
         </div>
     );

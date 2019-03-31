@@ -1,5 +1,4 @@
 const types = {
-    LOAD: 'load',
     RESET: 'reset',
     ADD: 'add',
     DELETE: 'delete',

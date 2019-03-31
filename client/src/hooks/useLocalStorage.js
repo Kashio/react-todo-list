@@ -1,10 +1,10 @@
 import {useEffect} from 'react';
 
-export default function useLocalStorage(name, data, dependencies) {
+export default function useLocalStorage(name, item, onLoad) {
     useEffect(() => {
-        return () => {
-            window.localStorage.setItem(name, data);
-        };
-    }, dependencies);
-    return window.localStorage.getItem(name);
+        onLoad(JSON.parse(window.localStorage.getItem(name)));
+    }, []);
+    useEffect(() => {
+        window.localStorage.setItem(name, JSON.stringify(item));
+    }, [item]);
 };
