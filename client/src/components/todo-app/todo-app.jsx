@@ -4,10 +4,11 @@ import reducer from '../../reducers/todos';
 import types from '../../actions/todos';
 import TodoContext from './todos-app.context';
 import TodoList from '@/todo-list/todo-list';
-
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const TodoApp = () => {
     const [todos, dispatch] = useReducer(reducer, []);
+    const savedTodos = useLocalStorage('todos', todos, []);
 
     const add = () => {
       dispatch({type: types.ADD});
