@@ -1,12 +1,12 @@
 import React from 'react';
 import './app.scss';
-import TodoList from '@/todo-list/todo-list';
+import TodoApp from '@/todo-app/todo-app';
 
 const App = () => {
     return (
         <div className="app">
             <main>
-                <TodoList/>
+                <TodoApp/>
             </main>
         </div>
     );
