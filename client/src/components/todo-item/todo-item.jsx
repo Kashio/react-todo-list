@@ -4,6 +4,7 @@ import types from '../../actions/todos';
 import TodoContext from '../todo-app/todos-app.context';
 
 const TodoItem = ({id, text, completed}) => {
+    console.log('render todo item with id: ', id);
     const dispatch = useContext(TodoContext);
 
     const update = () => {
@@ -27,4 +28,4 @@ const TodoItem = ({id, text, completed}) => {
     );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
