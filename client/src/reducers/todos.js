@@ -3,38 +3,58 @@ import types from '../actions/todos';
 export default function reducer(state, action) {
     switch (action.type) {
         case types.RESET:
-            return action.payload.todos;
+            return {
+                filter: action.payload.filter,
+                items: action.payload.items
+            };
         case types.ADD:
-            return [
+            return {
                 ...state,
-                {
-                    id: Number(new Date()),
-                    task: '',
-                    completed: false
-                }
-            ];
+                items: [
+                    ...state.items,
+                    {
+                        id: Number(new Date()),
+                        task: '',
+                        completed: false
+                    }
+                ]
+            };
         case types.DELETE:
-            return state.filter(todo => todo.id !== action.payload.id);
+            return {
+                ...state,
+                items: state.items.filter(todo => todo.id !== action.payload.id)
+            };
         case types.COMPLETE:
-            return state.map(todo => {
-                if (todo.id === action.payload.id) {
-                    return {
-                        ...todo,
-                        completed: !todo.completed
-                    };
-                }
-                return todo;
-            });
+            return {
+                ...state,
+                items: state.items.map(todo => {
+                    if (todo.id === action.payload.id) {
+                        return {
+                            ...todo,
+                            completed: !todo.completed
+                        };
+                    }
+                    return todo;
+                })
+            };
         case types.UPDATE:
-            return state.map(todo => {
-                if (todo.id === action.payload.id) {
-                    return {
-                        ...todo,
-                        text: action.payload.text
-                    };
-                }
-                return todo;
-            });
+            return {
+                ...state,
+                items: state.items.map(todo => {
+                    if (todo.id === action.payload.id) {
+                        return {
+                            ...todo,
+                            task: action.payload.task
+                        };
+                    }
+                    return todo;
+                })
+            };
+        case types.FILTER:
+            return {
+                ...state,
+                filter: action.payload.filter
+            };
         default:
             return state;
     }
