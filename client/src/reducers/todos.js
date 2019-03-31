@@ -7,7 +7,11 @@ export default function reducer(state, action) {
         case types.ADD:
             return [
                 ...state,
-                action.payload.todo
+                {
+                    id: Number(new Date()),
+                    task: '',
+                    completed: false
+                }
             ];
         case types.DELETE:
             return state.filter(todo => todo.id !== action.payload.id);
@@ -16,7 +20,7 @@ export default function reducer(state, action) {
                 if (todo.id === action.payload.id) {
                     return {
                         ...todo,
-                        complete: !todo.complete
+                        completed: !todo.completed
                     };
                 }
                 return todo;
